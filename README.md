@@ -1,0 +1,1 @@
+# augustroboshop-jenkins-shared-library
