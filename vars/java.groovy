@@ -7,7 +7,7 @@ def call() {
 
         stages {
 
-common.codequality()
+          common.codequality()
 
             stage ('Style checks') {
 
