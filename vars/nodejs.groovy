@@ -1,7 +1,11 @@
 def call() {
- node {
+    node {
 
-     common.codequality()
-
- }
- }
+        common.codequality()
+        if (branch == "main" || tag ==~ "*" ) {
+            stage('style checks') {
+                echo 'code Quality'
+            }
+        }
+    }
+}
