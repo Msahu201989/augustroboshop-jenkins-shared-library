@@ -1,12 +1,68 @@
-def call() {
-    node {
+//def call() {
+//    node {
+//
+//        sh 'env'
+//        common.codequality()
+//
+//
+////        if (branch == "main" || tag ==~ "*" ) {
+////            stage('style checks') {
+////                echo 'code Quality'
+////            }
+////        }
+//  }
+//}
 
-        sh 'env'
+
+pipeline {
+
+    agent {
+        node { label 'Workstation' }
+    }
+
+    stages {
+
         common.codequality()
-//        if (branch == "main" || tag ==~ "*" ) {
-//            stage('style checks') {
-//                echo 'code Quality'
-//            }
-//        }
-  }
+
+        stage('Style checks') {
+
+            when { tag "*" }
+
+            steps {
+                echo 'style checks'
+            }
+        }
+
+        stage ('unit Tests') {
+            when {
+                branch 'demo'
+            }
+            steps {
+                echo 'Unit Test'
+            }
+        }
+
+        stage ('Download dependencies') {
+            when {
+                branch 'demo'
+            }
+            steps {
+                echo 'Download Dependencies'
+            }
+        }
+
+        stage ('Prepare Artifact') {
+            when { tag "*" }
+            steps {
+                echo 'Prepare Artifact'
+            }
+        }
+
+        stage ('Publish Artifact') {
+            when { tag "*" }
+            steps {
+                echo 'Publish Artifact'
+            }
+        }
+    }
 }
