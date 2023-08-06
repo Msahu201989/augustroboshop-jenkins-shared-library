@@ -9,7 +9,7 @@ def call() {
 
           common.codequality()
 
-            stage ('Style checks') {
+            stage('Style checks') {
 
                 when { tag "*" }
 
