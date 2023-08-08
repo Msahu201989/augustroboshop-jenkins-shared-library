@@ -1,14 +1,14 @@
 def call() {
     node {
 
-
+        sh 'env'
         common.codequality()
 
-        if ( branch == "main" || tag ==~ "*" ) {
-            stage('Style checks') {
-                echo 'style checks'
-            }
-          }
+//        if ( branch == "main" || tag ==~ "*" ) {
+//            stage('Style checks') {
+//                echo 'style checks'
+//            }
+//          }
 
 //    pipeline {
 //
