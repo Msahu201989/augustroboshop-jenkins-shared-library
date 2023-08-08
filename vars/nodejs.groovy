@@ -1,17 +1,56 @@
 def call() {
-    node {
+    pipeline {
 
-        sh 'env'
-        common.codequality()
+        agent {
+            node { label 'Workstation' }
+        }
 
+        stages {
 
-//        if (branch == "main" || tag ==~ "*" ) {
-//            stage('style checks') {
-//                echo 'code Quality'
-//            }
-//        }
-  }
+            common.codequality()
+
+            stage('Style checks') {
+
+                when { tag "*" }
+
+                steps {
+                    echo 'style checks'
+                }
+            }
+
+            stage ('unit Tests') {
+                when {
+                    branch 'demo'
+                }
+                steps {
+                    echo 'Unit Test'
+                }
+            }
+
+            stage ('Download dependencies') {
+                when {
+                    branch 'demo'
+                }
+                steps {
+                    echo 'Download Dependencies'
+                }
+            }
+
+            stage ('Prepare Artifact') {
+                when { tag "*" }
+                steps {
+                    echo 'Prepare Artifact'
+                }
+            }
+
+            stage ('Publish Artifact') {
+                when { tag "*" }
+                steps {
+                    echo 'Publish Artifact'
+                }
+            }
+        }
+    }
+
 }
-
-
 
