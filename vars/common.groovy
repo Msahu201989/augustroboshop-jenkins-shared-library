@@ -5,7 +5,7 @@ def codequality() {
     }
 
 def codechecks() {
-    if ( BRANCH_NAME == "main" || tag ==~ ".*" ) {
+    if ( env.BRANCH_NAME == "main" || tag ==~ ".*" ) {
         stage('Style checks') {
             echo 'style checks'
         }
@@ -17,7 +17,7 @@ def codechecks() {
 }
 
 def artifacts () {
-    if ( TAG_NAME ==~ ".*" ) {
+    if ( env.TAG_NAME ==~ ".*" ) {
         stage('Prepare Artifacts') {
             echo 'Prepare Artifacts'
         }
