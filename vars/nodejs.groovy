@@ -1,44 +1,19 @@
 def call() {
     node {
 
-        sh 'env'
+        if (! env.TAG_NAME) {
+            env.TAG_NAME = ""
+        }
+
         common.codequality()
+        common.stylechecks()
+        common.artifacts()
 
-        if ( BRANCH_NAME == "main" || tag ==~ "*" ) {
-            stage('Style checks') {
-                echo 'style checks'
-            }
-          }
 
-//    pipeline {
-//
-//        agent {
-//            node { label 'Workstation' }
-//        }
-//
-//        stages {
-//
-//            common.codequality()
-//
+
 
 //
-//            stage ('unit Tests') {
-//                when {
-//                    branch 'demo'
-//                }
-//                steps {
-//                    echo 'Unit Test'
-//                }
-//            }
-//
-//            stage ('Download dependencies') {
-//                when {
-//                    branch 'demo'
-//                }
-//                steps {
-//                    echo 'Download Dependencies'
-//                }
-//            }
+
 //
 //            stage ('Prepare Artifact') {
 //                when { tag "*" }
