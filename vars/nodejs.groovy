@@ -3,6 +3,13 @@ def call() {
 
 
         common.codequality()
+
+        if ( branch == "main" || tag ==~ "*" ) {
+            stage('Style checks') {
+                echo 'style checks'
+            }
+          }
+
 //    pipeline {
 //
 //        agent {
@@ -13,14 +20,7 @@ def call() {
 //
 //            common.codequality()
 //
-//            stage('Style checks') {
-//
-//                when { tag "*" }
-//
-//                steps {
-//                    echo 'style checks'
-//                }
-//            }
+
 //
 //            stage ('unit Tests') {
 //                when {
