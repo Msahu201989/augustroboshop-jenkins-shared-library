@@ -1,4 +1,4 @@
-def call() {
+
     pipeline {
 
         agent {
@@ -7,7 +7,6 @@ def call() {
 
         stages {
 
-          common.codequality()
 
             stage('Style checks') {
 
@@ -52,4 +51,3 @@ def call() {
         }
     }
 
-}
