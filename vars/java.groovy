@@ -1,4 +1,4 @@
-
+def call() {
     pipeline {
 
         agent {
@@ -7,8 +7,13 @@
 
         stages {
 
+            stage ('code quality') {
+                steps {
+                    echo 'code quality'
+                }
+            }
 
-            stage('Style checks') {
+            stage ('Style checks') {
 
                 when { tag "*" }
 
@@ -51,3 +56,4 @@
         }
     }
 
+}
