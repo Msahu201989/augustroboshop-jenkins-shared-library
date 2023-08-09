@@ -1,15 +1,21 @@
 def call() {
     node {
 
-        if (! env.TAG_NAME) {
-            env.TAG_NAME = ""
-        }
+
 
         common.codequality()
         common.codechecks()
         common.artifacts()
 
 
+
+
+
+
+
+//        if (! env.TAG_NAME) {
+//            env.TAG_NAME = ""
+//        }
 
 
 //
