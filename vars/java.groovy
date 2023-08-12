@@ -1,59 +1,13 @@
 def call() {
-    pipeline {
-
-        agent {
-            node { label 'Workstation' }
+    node {
+        try {
+            common.codecheckout()
+            common.codequality()
+            common.codechecks()
+            common.artifacts()
+        } catch (Exception e) {
+            mail bcc: '', body: "Build Failure ${RUN_TESTS_DISPLAY_URL}", cc: '', from: 'mukeshsahu20@gmail.com', replyTo: '', subject: 'BUILD FAILURE', to: 'mukeshsahu20@gmail.com'
         }
 
-        stages {
-
-            stage ('code quality') {
-                steps {
-                    echo 'code quality'
-                }
-            }
-
-            stage ('Style checks') {
-
-                when { tag "*" }
-
-                steps {
-                    echo 'style checks'
-                }
-            }
-
-            stage ('unit Tests') {
-                when {
-                    branch 'demo'
-                }
-                steps {
-                    echo 'Unit Test'
-                }
-            }
-
-            stage ('Download dependencies') {
-                when {
-                    branch 'demo'
-                }
-                steps {
-                    echo 'Download Dependencies'
-                }
-            }
-
-            stage ('Prepare Artifact') {
-                when { tag "*" }
-                steps {
-                    echo 'Prepare Artifact'
-                }
-            }
-
-            stage ('Publish Artifact') {
-                when { tag "*" }
-                steps {
-                    echo 'Publish Artifact'
-                }
-            }
-        }
     }
-
 }
