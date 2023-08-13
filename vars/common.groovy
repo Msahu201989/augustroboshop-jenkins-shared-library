@@ -40,7 +40,8 @@ def artifacts () {
 
          if (env.APPTYPE == "java") {
            sh ''' 
-              mvn clean package            # mvn clean is a Maven command that deletes all the generated files and resources from the previous build of your project
+              mvn clean package  
+//# # mvn clean is a Maven command that deletes all the generated files and resources from the previous build of your project         
               mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
               zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
               '''
