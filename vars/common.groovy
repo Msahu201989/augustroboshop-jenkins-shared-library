@@ -16,7 +16,7 @@ def codequality() {
     }
 
 def codechecks() {
-    if ( env.BRANCH_NAME == "main" || tag ==~ ".*" ) {
+    if ( env.BRANCH_NAME == "main" || env.TAG_NAME ==~ ".*" ) {
         stage('Style checks') {
             echo 'style checks'
         }
