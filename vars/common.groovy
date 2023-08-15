@@ -75,13 +75,5 @@ def artifacts () {
          docker push 332775960109.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${TAG_NAME}
              '''
             }
-
-            stage('Prepare Artifacts') {
-                echo 'Prepare Artifacts'
-            }
-
-            stage('Publish Artifacts') {
-                echo 'Publish Artifacts'
-            }
         }
 
