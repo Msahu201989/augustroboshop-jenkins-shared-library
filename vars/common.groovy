@@ -28,7 +28,7 @@ def codechecks() {
 }
 
 def artifacts () {
-    if (env.TAG_NAME ==~ ".*") {
+//    if (env.TAG_NAME ==~ ".*") {
 
         stage('Prepare Artifacts') {
             if (env.APPTYPE == "nodejs") {
@@ -84,4 +84,3 @@ def artifacts () {
             }
         }
     }
-}
