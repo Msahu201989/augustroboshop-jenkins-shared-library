@@ -83,4 +83,4 @@ def artifacts () {
                 echo 'Publish Artifacts'
             }
         }
-    
+
