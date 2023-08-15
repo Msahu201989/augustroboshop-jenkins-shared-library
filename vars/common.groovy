@@ -41,27 +41,27 @@ def artifacts () {
         if (env.APPTYPE == "java") {
             sh ''' 
               mvn clean package  
-//mvn clean is a Maven command that deletes all the generated files and resources from the previous build of your project         
+#mvn clean is a Maven command that deletes all the generated files and resources from the previous build of your project         
               mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-              zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+              #zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
               '''
         }
         if (env.APPTYPE == "python") {
             sh '''
-           zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+           #zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
              '''
         }
         if (env.APPTYPE == "nginx") {
             sh '''
-            cd static
-            zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+            #cd static
+            #zip -r ../${COMPONENT}-${TAG_NAME}.zip *
             '''
         }
     }
 
     stage('Build Docker Image') {
         sh '''
-               docker build -t 332775960109.dkr.ecr.us-east-1.amazonaws.com/cart:latest .
+               docker build -t 332775960109.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest .
                '''
     }
 
@@ -71,8 +71,8 @@ def artifacts () {
         stage('Publish Docker Image') {
             sh '''
          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 332775960109.dkr.ecr.us-east-1.amazonaws.com
-          docker tag 332775960109.dkr.ecr.us-east-1.amazonaws.com/cart:latest 332775960109.dkr.ecr.us-east-1.amazonaws.com/cart:latest
-         docker push 332775960109.dkr.ecr.us-east-1.amazonaws.com/cart:latest
+          docker tag 332775960109.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest 332775960109.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${TAG_NAME}
+         docker push 332775960109.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${TAG_NAME}
              '''
         }
     }
