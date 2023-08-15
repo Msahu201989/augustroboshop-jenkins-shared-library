@@ -34,7 +34,7 @@ def artifacts () {
             if (env.APPTYPE == "nodejs") {
                 sh '''
           npm install 
-          zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js 
+         # zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js 
         '''
             }
 
